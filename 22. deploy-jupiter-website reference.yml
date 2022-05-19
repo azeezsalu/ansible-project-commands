@@ -1,0 +1,54 @@
+---
+
+- name: deploy jupiter website
+  hosts: 
+  become: 
+  become_user: 
+
+  tasks:
+    - name: update ec2 instance
+      yum:
+        name: 
+        state: 
+        update_cache: 
+
+    - name: install apache server
+      yum:
+        name: 
+        state: 
+
+    - name: change directory to the html directory
+      shell: 
+
+    - name: download web files from github
+      get_url:
+        url: 
+        dest: 
+
+    - name: unzip the zip folder
+      ansible.builtin.unarchive:
+        src: 
+        dest: 
+        remote_src: 
+
+    - name: copy webfiles from the jupiter-main directory to the html directory
+      copy: 
+        src: 
+        dest: 
+        remote_src: 
+
+    - name: remove the jupiter-main directory
+      file: 
+        path: 
+        state: 
+
+    - name: remove the jupiter-main.zip folder
+      file: 
+        path: 
+        state: 
+
+    - name: start apache server, if not started
+      ansible.builtin.service:
+        enabled: 
+        name: 
+        state: 
