@@ -1,0 +1,3 @@
+sudo yum update -y
+sudo yum -y install python-pip
+sudo pip install boto3
