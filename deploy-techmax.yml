@@ -1,0 +1,54 @@
+---
+
+- name: deploy techmax website
+  hosts: all
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: update ec2 instance
+      yum:
+        name: "*"
+        state: latest
+        update_cache: yes
+
+    - name: install apache server
+      yum:
+        name: httpd
+        state: latest
+
+    - name: change directory to the html directory
+      shell: cd /var/www/html
+
+    - name: download web files from github
+      get_url:
+        url: https://github.com/azeezsalu/techmax/archive/refs/heads/main.zip
+        dest: /var/www/html/
+
+    - name: unzip the zip folder
+      ansible.builtin.unarchive:
+        src: /var/www/html/techmax-main.zip
+        dest: /var/www/html
+        remote_src: yes
+
+    - name: copy webfiles from the techmax-main directory to the html directory
+      copy: 
+        src: /var/www/html/techmax-main/
+        dest: /var/www/html
+        remote_src: yes
+
+    - name: remove the techmax-main directory
+      file: 
+        path: /var/www/html/techmax-main
+        state: absent
+
+    - name: remove the techmax-main.zip folder
+      file: 
+        path: /var/www/html/techmax-main.zip
+        state: absent 
+
+    - name: start apache server, if not started
+      ansible.builtin.service:
+        enabled: yes
+        name: httpd
+        state: started
