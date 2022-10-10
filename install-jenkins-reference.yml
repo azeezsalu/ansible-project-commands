@@ -1,0 +1,39 @@
+---
+- name: 
+  hosts: 
+  become:
+  become_user: 
+  tasks:
+  - name: yum update
+    yum:
+      name: 
+      state: 
+
+  - name: add the jenkins repo
+    get_url:
+      url: 
+      dest: 
+
+  - name: import a key file from jenkins-ci
+    ansible.builtin.rpm_key:
+      state: 
+      key: 
+
+  - name: yum update
+    yum:
+      name: 
+      state: 
+
+  - name: install java
+    shell: 
+
+  - name: install jenkins
+    yum:
+      name: 
+      state: 
+
+  - name: start jenkins
+    ansible.builtin.systemd:
+      enabled:
+      name: 
+      state:
